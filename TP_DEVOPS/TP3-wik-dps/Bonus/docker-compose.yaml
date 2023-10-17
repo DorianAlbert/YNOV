@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  # Service MySQL pour la base de données WordPress
+  mysql:
+    image: mysql:5.7
+    container_name: wordpress-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+  # Service Memcached pour la mise en cache
+  memcached:
+    image: memcached:latest
+    container_name: wordpress-memcached
+    networks:
+      - mynetwork
+
+  # Service WordPress répliqué au moins 2 fois
+  wordpress:
+    image: wordpress:latest
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CACHE_HOST: memcached  # Utilisez le nom du service Memcached comme hôte
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 2 
+
+  # Service Nginx pour le reverse proxy
+  nginx:
+    image: nginx:latest
+    container_name: wordpress-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - wordpress
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  wordpress_data:
