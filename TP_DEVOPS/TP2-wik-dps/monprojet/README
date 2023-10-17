@@ -1,0 +1,6 @@
+1-Lancer node serveur.js en ligne de commande
+2-Dans un terminal 
+                {
+                    -pour le header qui s'affiche : curl -i http://localhost:3000/ping
+                    -pour le header qui ne s'affiche pas  : curl -i http://localhost:3000/notping
+                }

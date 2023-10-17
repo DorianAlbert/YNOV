@@ -1,0 +1,71 @@
+
+ Command line tool for Docker Scout
+
+Usage
+  docker scout [command]
+
+Available Commands
+  cache           Manage Docker Scout cache and temporary files
+  compare         Compare two images and display differences (experimental)
+  config          Manage Docker Scout configuration
+  cves            Display CVEs identified in a software artifact
+  enroll          Enroll an organization with Docker Scout
+  environment     Manage environments (experimental)
+  integration     Commands to list, configure, and delete Docker Scout integrations
+  policy          Evaluate policies against an image and display the policy evaluation results (experimental)
+  quickview       Quick overview of an image
+  recommendations Display available base image updates and remediation recommendations
+  repo            Commands to list, enable, and disable Docker Scout on repositories
+  version         Show Docker Scout version information
+
+Use "docker scout [command] --help" for more information about a command.
+
+Learn More
+  Read docker scout cli reference at https://docs.docker.com/engine/reference/commandline/scout/
+
+Report Issues
+  Raise bugs and feature requests at https://github.com/docker/scout-cli/issues
+
+level=error msg="Status: unknown command: \"mon-api\", Code: 1"
+PS C:\Users\doria\OneDrive\Bureau\Ynov Cour\DEVOPS\TP\TP2-wik-dps> docker scout cves mon-api
+    ! New version 1.0.8 available (installed version is 1.0.7) at https://github.com/docker/scout-cli
+    v SBOM of image already cached, 234 packages indexed
+    x Detected 1 vulnerable package with 1 vulnerability
+
+
+## Overview
+
+                    │       Analyzed Image
+────────────────────┼──────────────────────────────
+  Target            │  mon-api:latest 
+    digest          │  2fadc2f0ad5a 
+    platform        │ linux/amd64
+    vulnerabilities │    0C     0H     1M     0L 
+    size            │ 78 MB
+    packages        │ 234
+
+
+## Packages and Vulnerabilities
+
+   0C     0H     1M     0L  semver 7.3.7
+pkg:npm/semver@7.3.7
+
+    x MEDIUM CVE-2022-25883 [Inefficient Regular Expression Complexity]
+      https://scout.docker.com/v/CVE-2022-25883
+      Affected range : >=7.0.0
+                     : <7.5.2
+      Fixed version  : 7.5.2
+      CVSS Score     : 5.3
+      CVSS Vector    : CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L
+
+
+
+1 vulnerability found in 1 package
+  LOW       0
+  MEDIUM    1
+  HIGH      0
+  CRITICAL  0
+
+
+What's Next?
+  View base image update recommendations → docker scout recommendations mon-api:latest
