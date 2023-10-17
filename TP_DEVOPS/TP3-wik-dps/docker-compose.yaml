@@ -2,8 +2,8 @@ version: '3'
 services:
   app:
     build:
-      context: ../
-      dockerfile: single-stage.dockerfile
+      context: C:\Users\doria\OneDrive\Bureau\YNOV\YNOV\TP_DEVOPS\TP3-wik-dps\
+      dockerfile: single-stage
     deploy:
       replicas: 4
   reverse-proxy:
