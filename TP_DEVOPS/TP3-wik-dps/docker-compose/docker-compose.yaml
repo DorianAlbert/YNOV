@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: single-stage.dockerfile
+    deploy:
+      replicas: 4
+  reverse-proxy:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8080:80"
