@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: echo-pod
+  labels:
+    app: echo-app
+spec:
+  containers:
+  - name: echo-container
+    image: registry.cluster.wik.cloud/public/echo
